@@ -18,33 +18,24 @@
 
 package org.wso2.carbon.identity.api.otp.service.smsotp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.cxf.jaxrs.ext.multipart.Attachment;
-import org.apache.cxf.jaxrs.ext.multipart.Multipart;
-import java.io.InputStream;
-import java.util.List;
-
+import io.swagger.annotations.*;
 import org.wso2.carbon.identity.api.otp.service.smsotp.dto.Error;
-import org.wso2.carbon.identity.api.otp.service.smsotp.dto.OTPGenerateResponse;
-import org.wso2.carbon.identity.api.otp.service.smsotp.dto.OTPGenerationRequest;
-import org.wso2.carbon.identity.api.otp.service.smsotp.dto.OTPValidationRequest;
-import org.wso2.carbon.identity.api.otp.service.smsotp.dto.OTPValidationResponse;
-import org.wso2.carbon.identity.api.otp.service.smsotp.SmsotpApiService;
+import org.wso2.carbon.identity.api.otp.service.smsotp.dto.*;
+import org.wso2.carbon.identity.api.otp.service.smsotp.factories.SmsotpApiServiceFactory;
 
 import javax.validation.Valid;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-import io.swagger.annotations.*;
-
-import javax.validation.constraints.*;
 
 @Path("/smsotp")
 @Api(description = "The smsotp API")
 
 public class SmsotpApi  {
 
-    @Autowired
-    private SmsotpApiService delegate;
+    private SmsotpApiService delegate = SmsotpApiServiceFactory.getSmsotpApi();
 
     @Valid
     @POST

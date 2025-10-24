@@ -18,35 +18,24 @@
 
 package org.wso2.carbon.identity.api.otp.service.emailotp;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.cxf.jaxrs.ext.multipart.Attachment;
-import org.apache.cxf.jaxrs.ext.multipart.Multipart;
-import java.io.InputStream;
-import java.util.List;
-
+import io.swagger.annotations.*;
 import org.wso2.carbon.identity.api.otp.service.emailotp.dto.Error;
-import org.wso2.carbon.identity.api.otp.service.emailotp.dto.OTPGenerateResponse;
-import org.wso2.carbon.identity.api.otp.service.emailotp.dto.OTPGenerationRequest;
-import org.wso2.carbon.identity.api.otp.service.emailotp.dto.OTPValidationRequest;
-import org.wso2.carbon.identity.api.otp.service.emailotp.dto.OTPValidationResponse;
-import org.wso2.carbon.identity.api.otp.service.emailotp.dto.OTPVerificationRequest;
-import org.wso2.carbon.identity.api.otp.service.emailotp.dto.OTPVerificationResponse;
-import org.wso2.carbon.identity.api.otp.service.emailotp.EmailotpApiService;
+import org.wso2.carbon.identity.api.otp.service.emailotp.dto.*;
+import org.wso2.carbon.identity.api.otp.service.emailotp.factories.EmailotpApiServiceFactory;
 
 import javax.validation.Valid;
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-import io.swagger.annotations.*;
-
-import javax.validation.constraints.*;
 
 @Path("/emailotp")
 @Api(description = "The emailotp API")
 
 public class EmailotpApi  {
 
-    @Autowired
-    private EmailotpApiService delegate;
+    private EmailotpApiService delegate = EmailotpApiServiceFactory.getEmailotpApi();
 
     @Valid
     @POST
